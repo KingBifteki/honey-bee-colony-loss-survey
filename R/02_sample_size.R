@@ -129,6 +129,8 @@ deff_plan <- V_st(st_full$n) / V_srs(sum(st_full$n))
 # counted in whole respondents as in neyman_plan()
 r_min <- ceiling(Nh[["COM"]]^2 * S_prior[["COM"]]^2 / (V0 + Nh[["COM"]] * S_prior[["COM"]]^2))
 R_min <- r_min / Nh[["COM"]]
+# the same threshold for the ratio estimator, with the residual SD about the colony counts
+R_min_ratio <- ceiling(Nh[["COM"]]^2 * Se_prior[["COM"]]^2 / (V0 + Nh[["COM"]] * Se_prior[["COM"]]^2)) / Nh[["COM"]]
 
 # smallest margin reachable at the planned response: with every beekeeper issued,
 # only the non-response variance sum N_h^2 (1 - r_h/N_h) S_h^2 / r_h is left
@@ -161,7 +163,8 @@ plan_summary <- data.frame(
   V_takeall_resp = st_resp$V_ta, share_V0_takeall = st_resp$V_ta / V0,
   n0_srs = srs$n0, n_srs_full = srs$n, issued_srs = srs_r$issued, n_prop_full = sum(n_prop), n_com_first = n_com_first,
   split_hob = split_hob, n_split_hob = n_split_hob, n_ratio_full = n_ratio_full, n_ratio_resp = n_ratio_resp, ratio_margin_sd = ratio_margin_sd,
-  deff_plan = deff_plan, n_ratio = srs$n / st_full$n_total, R_min_com = R_min, rel_min_resp = rel_min_resp)
+  deff_plan = deff_plan, n_ratio = srs$n / st_full$n_total, R_min_com = R_min, R_min_com_ratio = R_min_ratio,
+  rel_min_resp = rel_min_resp)
 
 write.csv(prior,        file.path(DIR_TAB, "plan_prior.csv"),      row.names = FALSE)
 write.csv(prior_infl,   file.path(DIR_TAB, "plan_prior_inflation.csv"), row.names = FALSE)
