@@ -1,5 +1,0 @@
-"method","estimate","error_pct"
-"Naive (unweighted)",109271.212909943,161.083346259391
-"Design weights only",31541.9063001842,-24.636450672152
-"Adjusted weights (final)",39761.9831776342,-4.99609782420803
-"True total",41853,0
