@@ -24,6 +24,7 @@ suppressPackageStartupMessages({
 })
 
 # ---- Random seeds (one per stage so each stage is reproducible on its own) --
+RNGkind("Mersenne-Twister", "Inversion", "Rejection")   # R's defaults since 3.6, fixed so any setup gives the same draws
 SEED_POP    <- 4102   # Section C2: generating the finite population
 SEED_SAMPLE <- 2026   # Section C3: drawing the realised sample (+ fieldwork)
 SEED_BENCH  <- 2027   # Section D6: drawing the SRSWOR benchmark sample
