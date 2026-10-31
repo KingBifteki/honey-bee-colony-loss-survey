@@ -560,7 +560,7 @@ if (file.exists("report/ai_declaration.pdf")) {
       "the average estimated SEs match the empirical SEs, and coverage is close to 95%.\n",
       "* The project was rebuilt from a fresh download of the GitHub repository, and every data file, table, figure and the report ",
       "came out identical.\n",
-      "* Claude checked the details of every reference (authors, title, journal, volume, pages and DOI) against Crossref, ",
+      "* I checked the references myself. Claude also checked the details of every reference (authors, title, journal, volume, pages and DOI) against Crossref, ",
       "and every number and claim taken from the literature against the full text of its source.\n",
       "* I reviewed each section before moving on to the next.\n", sep = "")
 }
