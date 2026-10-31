@@ -539,11 +539,29 @@ est_r <- predict(rs, total = M_h[names(rs$ratios)])      # ratio estimator
 ```
 
 ```{r aidecl, results = "asis"}
-# Signed AI declaration, added only when the file is present, so the report also renders without it
+# Signed AI declaration and how the work was verified, added only when the form is present, so the report also renders without it
 if (file.exists("report/ai_declaration.pdf")) {
   cat("\\newpage\n\n# Appendix D — Generative AI declaration {.unnumbered}\n\n",
       "```{=latex}\n\\begin{center}\n",
       "\\includegraphics[trim=66 80 64 112, clip]{ai_declaration.pdf}\n",   # left bottom right top: drops the form's own heading and page number
-      "\\end{center}\n```\n", sep = "")
+      "\\end{center}\n```\n\n", sep = "")
+  cat("\\newpage\n\n## How generative AI was used {.unnumbered}\n\n",
+      "I used Claude (Anthropic), through Claude Code, for the uses ticked on the form (box numbers in brackets): finding and summarising ",
+      "the literature (2); planning the survey design and the simulation study (3); the analysis, its interpretation and the presentation ",
+      "of the results in tables and figures (4); writing and debugging the R code (6); editing for grammar and readability (8); drafting, ",
+      "structuring and laying out the report in Quarto (9); and formatting the APA references (10). I made or approved every design decision, including the ",
+      "hypothetical COLOSS country, stratification by operation size with Neyman allocation and a take-all stratum, the ", rp,
+      "% response rate and the ratio estimator.\n\n",
+      "## How the work was verified {.unnumbered}\n\n",
+      "* Every number in the report is computed by the code and inserted automatically, so the text always matches the results.\n",
+      "* The code checks itself: the hand-coded estimators and variances must equal those from the `survey` package's `svytotal()` ",
+      "and `svyratio()`, and the weights must sum to $N=$ ", f0(N), ".\n",
+      "* The simulation of ", f0(g_sim("SRSWOR", "reps")), " samples confirms the theory: the estimators are essentially unbiased, ",
+      "the average estimated SEs match the empirical SEs, and coverage is close to 95%.\n",
+      "* The project was rebuilt from a fresh download of the GitHub repository, and every data file, table, figure and the report ",
+      "came out identical.\n",
+      "* Claude checked the details of every reference (authors, title, journal, volume, pages and DOI) against Crossref, ",
+      "and every number and claim taken from the literature against the full text of its source.\n",
+      "* I reviewed each section before moving on to the next.\n", sep = "")
 }
 ```
