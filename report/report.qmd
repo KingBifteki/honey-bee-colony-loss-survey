@@ -1,5 +1,5 @@
 ---
-title: "How Many Honey Bee Colonies Are Lost over Winter?"
+title: "Estimating Winter Honey Bee Colony Losses"
 subtitle: "Design and simulation of a stratified sample survey of registered beekeepers"
 author: "Jun Xi Yip — 2554427 · STAT4102 Applied Sampling Mini Project"
 thanks: "Code, data and README: <https://github.com/KingBifteki/honey-bee-colony-loss-survey>"
@@ -99,7 +99,7 @@ Honey bees produce honey and play a critical role as pollinators of crops and na
 
 ## Statement of the problem {#sec-problem}
 
-The National Colony Loss Survey 2026 is to estimate how many honey bee colonies the registered beekeepers of a hypothetical country lost over winter 2025/26, from 1 October 2025 to 31 March 2026. The country takes part in the COLOSS monitoring and uses its case definitions and questionnaire. Unlike the self-selected samples common in colony-loss monitoring (@sec-lit), however, the survey must be a probability sample: its design must differ from simple random sampling, its 95% confidence interval (CI) must have a half-width of at most 5% of a baseline value (@sec-baseline), and simple random sampling without replacement (SRSWOR) serves as the benchmark.
+This project designs a sample survey to estimate how many honey bee colonies the registered beekeepers of a hypothetical country lost over winter 2025/26, from 1 October 2025 to 31 March 2026. The country takes part in the COLOSS monitoring and uses its case definitions and questionnaire. Unlike the self-selected samples common in colony-loss monitoring (@sec-lit), however, the survey must be a probability sample: its design must differ from simple random sampling, its 95% confidence interval (CI) must have a half-width of at most 5% of a baseline value (@sec-baseline), and simple random sampling without replacement (SRSWOR) serves as the benchmark.
 
 ## Aim and objectives (A1) {#sec-aims}
 
@@ -536,4 +536,14 @@ des  <- svydesign(ids = ~1, strata = ~stratum, fpc = ~N_h,
 est  <- svytotal(~colonies_lost, des, deff = TRUE)       # expansion estimator
 rs   <- svyratio(~colonies_lost, ~colonies_oct, des, separate = TRUE)
 est_r <- predict(rs, total = M_h[names(rs$ratios)])      # ratio estimator
+```
+
+```{r aidecl, results = "asis"}
+# Signed AI declaration, added only when the file is present, so the report also renders without it
+if (file.exists("report/ai_declaration.pdf")) {
+  cat("\\newpage\n\n# Appendix D — Generative AI declaration {.unnumbered}\n\n",
+      "```{=latex}\n\\begin{center}\n",
+      "\\includegraphics[trim=66 80 64 112, clip]{ai_declaration.pdf}\n",   # left bottom right top: drops the form's own heading and page number
+      "\\end{center}\n```\n", sep = "")
+}
 ```
